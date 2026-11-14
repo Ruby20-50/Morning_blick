@@ -6,6 +6,29 @@ dist/
 wheels/
 *.egg-info
 
+# webhooks 
+*.json
+
+# Database
+*.db
+*.rdb
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# Jupyter NB Checkpoints
+.ipynb_checkpoints/
+
 # Virtual environments
 .venv
 .env
+
+# Exclude trained models
+/models/
+
+# exclude data from source control by default
+/data/
+
+*.egg-info/
+build/*.zip
