@@ -32,3 +32,4 @@ wheels/
 
 *.egg-info/
 build/*.zip
+docs/cloudflared-config.yml

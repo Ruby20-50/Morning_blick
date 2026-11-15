@@ -38,4 +38,20 @@ API docs: http://127.0.0.1:8000/docs
 ### Tutorials used to finish this project
 Youtube channel: [Dave Ebbelaar](https://www.youtube.com/@daveebbelaar)
 
-Repositories: [workspace-template](https://github.com/daveebbelaar/demo-project/tree/main)
+Repositories: 
+
+ [workspace-template](https://github.com/daveebbelaar/demo-project/tree/main)
+
+[ai-cookbook](https://github.com/daveebbelaar/ai-cookbook)
+
+### Nylas webhook setup (message.created)
+Incoming `POST /events` calls are accepted only with a valid `x-nylas-signature`
+(HMAC-SHA256 of the raw body, keyed with `NYLAS_WEBHOOK_SECRET`). Setup order:
+
+1. Start the app: `uv run uvicorn app.main:app --reload`
+2. Start the tunnel with [docs/cloudflared-config.example.yml](docs/cloudflared-config.example.yml)
+   (copied and filled in); set `SERVER_URL=https://<tunnel-hostname>` in `.env`.
+3. Create the webhook: `uv run python -m app.scripts.create_webhook`
+   (Nylas sends a challenge to `/events` during creation, so steps 1–2 must be running).
+4. Copy the printed secret into `.env` as `NYLAS_WEBHOOK_SECRET` (never commit it).
+5. Restart the app so the new secret is loaded.

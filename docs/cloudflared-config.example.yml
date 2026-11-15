@@ -1,0 +1,14 @@
+# Cloudflare tunnel config for Morning Blick (example; copy and fill in the placeholders).
+# Run with:  cloudflared tunnel --config docs/cloudflared-config.yml run
+# Only the Nylas webhook endpoint is exposed; every other path gets a 404 from cloudflared.
+tunnel: <UUID>
+credentials-file: /home/<user>/.cloudflared/<UUID>.json  # keep this file out of git
+
+ingress:
+  # Exactly /events (GET challenge + POST notifications). The query string is not part
+  # of the matched path, so GET /events?challenge=... still matches.
+  - hostname: <tunnel-hostname>
+    path: ^/events$
+    service: http://localhost:8000
+  # Required catch-all: must be the last rule.
+  - service: http_status:404

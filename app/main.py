@@ -4,14 +4,18 @@ import uvicorn
 from fastapi import FastAPI
 
 from app import __version__
+from app.api.nylas_routes import router as nylas_router
 from app.api.routes import router
+from app.api.session import SessionMiddleware
 from app.config import get_settings
 
 
 def create_app() -> FastAPI:
     settings = get_settings()
     application = FastAPI(title=settings.app_name, version=__version__, debug=settings.debug)
+    application.add_middleware(SessionMiddleware)
     application.include_router(router)
+    application.include_router(nylas_router)
     return application
 
 
