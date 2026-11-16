@@ -1,0 +1,27 @@
+{
+  "request_id": "req-calendars-1",
+  "data": [
+    {
+      "id": "cal-holidays",
+      "grant_id": "grant-test",
+      "name": "Holidays in Germany",
+      "object": "calendar",
+      "read_only": true,
+      "is_owned_by_user": false,
+      "is_primary": false,
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "id": "cal-primary",
+      "grant_id": "grant-test",
+      "name": "Personal",
+      "object": "calendar",
+      "read_only": false,
+      "is_owned_by_user": true,
+      "is_primary": true,
+      "timezone": "Europe/Berlin",
+      "hex_color": "#039BE5"
+    }
+  ],
+  "next_cursor": null
+}

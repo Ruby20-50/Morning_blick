@@ -1,0 +1,18 @@
+{
+  "latitude": 52.52,
+  "longitude": 13.419998,
+  "timezone": "Europe/Berlin",
+  "some_future_field": {"ignored": true},
+  "current": {
+    "time": "2026-11-15T08:00",
+    "interval": 900,
+    "temperature_2m": 7.6,
+    "weather_code": null
+  },
+  "daily": {
+    "time": ["2026-11-15"],
+    "temperature_2m_max": [null],
+    "temperature_2m_min": [3.1],
+    "precipitation_probability_max": null
+  }
+}

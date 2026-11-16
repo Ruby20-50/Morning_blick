@@ -33,6 +33,8 @@
       padding: 12px 20px; font: inherit; border: 1px solid #1f1f1f; border-radius: 10px;
       background: #1f1f1f; color: #fff; cursor: pointer;
     }
+    footer { margin-top: 20px; color: #666; font-size: 0.875rem; }
+    footer a { color: inherit; }
     @media (max-width: 640px) {
       body { padding: 16px; }
       .grid { grid-template-columns: 1fr; grid-template-areas: "weather" "tasks" "updates" "news"; }
@@ -43,31 +45,47 @@
 <main>
   <header>
     <h1>Morning Blick</h1>
-    <span class="date">{{ today }}</span>
+    <span class="date">{{ briefing.date.label }}</span>
   </header>
 
-  {% macro card(cls, title, items) %}
+  {# One card per section. `caller()` renders a single item; the macro handles the three states. #}
+  {% macro card(cls, title, section, empty_text="No data yet") %}
   <section class="card {{ cls }}">
     <h2>{{ title }}</h2>
-    {% if items %}
-      <ul>{% for item in items %}<li>{{ item }}</li>{% endfor %}</ul>
+    {% if section.status == "unavailable" %}
+      <p class="empty">Currently unavailable</p>
+    {% elif section.items %}
+      <ul>{% for item in section.items %}<li>{{ caller(item) }}</li>{% endfor %}</ul>
     {% else %}
-      <p class="empty">No data yet</p>
+      <p class="empty">{{ empty_text }}</p>
     {% endif %}
   </section>
   {% endmacro %}
 
   <div class="grid">
-    {{ card("weather", "Weather in Berlin", weather) }}
-    {{ card("updates", "Berlin updates", updates) }}
-    {{ card("tasks", "Tasks of the day", tasks) }}
-    {{ card("news", "Most recent news", news) }}
+    {% call(item) card("weather", "Weather in Berlin", briefing.weather) %}{{ item }}{% endcall %}
+    {% call(item) card("updates", "Berlin updates", briefing.transport, "No disruptions") %}{{ item }}{% endcall %}
+    {% call(item) card("tasks", "Tasks of the day", briefing.schedule) -%}
+      {%- if item.time %}{{ item.time }} {% elif item.all_day %}All day · {% endif %}{{ item.title -}}
+    {%- endcall %}
+    {% call(item) card("news", "Most recent news", briefing.news) -%}
+      {%- if item.url is http_url -%}
+        <a href="{{ item.url }}" rel="noopener noreferrer" target="_blank">{{ item.title }}</a>
+      {%- else -%}
+        {{ item.title }}
+      {%- endif -%}
+    {%- endcall %}
   </div>
 
   <form action="/ask" method="post">
     <input type="text" name="question" placeholder="Ask your assistant" aria-label="Ask your assistant" required>
     <button type="submit">Send</button>
   </form>
+
+  <footer>
+    <a href="https://open-meteo.com/" rel="noopener noreferrer" target="_blank">Weather data by Open-Meteo.com</a>
+    (<a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener noreferrer" target="_blank">CC BY 4.0</a>)
+  </footer>
 </main>
 </body>
 </html>

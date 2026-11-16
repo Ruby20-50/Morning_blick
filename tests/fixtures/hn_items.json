@@ -1,0 +1,14 @@
+{
+  "9001": {"by": "alice", "descendants": 12, "id": 9001, "kids": [9101, 9102], "score": 250, "time": 1763190000, "title": "Show HN: Tea &amp; Biscuits, a tiny scheduler", "type": "story", "url": "https://example.com/tea"},
+  "9002": null,
+  "9003": {"deleted": true, "id": 9003, "time": 1763190100, "type": "story"},
+  "9004": {"by": "bob", "dead": true, "id": 9004, "score": 1, "time": 1763190200, "title": "Dead story", "type": "story", "url": "https://example.com/dead"},
+  "9005": {"by": "carol", "descendants": 40, "id": 9005, "score": 120, "text": "What do you use for <i>notes</i>?", "time": 1763190300, "title": "Ask HN: How do you take notes?", "type": "story"},
+  "9006": {"by": "dave", "id": 9006, "score": 3, "time": 1763190400, "type": "story", "url": "https://example.com/untitled"},
+  "9007": {"by": "acme", "id": 9007, "score": 1, "time": 1763190500, "title": "Acme (YC W24) is hiring engineers", "type": "job", "url": "https://acme.example/jobs", "future_field": {"x": 1}},
+  "9008": {"by": "eve", "id": 9008, "score": 9, "time": 1763190600, "title": "Suspicious link", "type": "story", "url": "javascript:alert(1)"},
+  "9009": {"by": "frank", "id": 9009, "score": 77, "time": 1763190700, "title": "A story about <b>bold</b> HTML", "type": "story", "url": "http://example.org/bold"},
+  "9010": {"by": "grace", "id": 9010, "score": 50, "time": 1763190800, "title": "Sixth valid story", "type": "story", "url": "https://example.com/sixth"},
+  "9011": {"by": "heidi", "id": 9011, "score": 40, "time": 1763190900, "title": "Never requested", "type": "story", "url": "https://example.com/11"},
+  "9012": {"by": "ivan", "id": 9012, "score": 30, "time": 1763191000, "title": "Never requested either", "type": "story", "url": "https://example.com/12"}
+}

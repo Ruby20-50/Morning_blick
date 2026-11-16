@@ -1,6 +1,5 @@
 """HTTP routes for the app."""
 
-from datetime import date
 from pathlib import Path
 from urllib.parse import parse_qs
 
@@ -9,24 +8,22 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
 from app.config import Settings, get_settings
-from app.schemas import CalculationRequest, CalculationResponse, Operation
-from app.services.calculator import OPERATIONS
+from app.services.briefing import build_briefing
+from app.services.http import is_http_url
 
 router = APIRouter()
 templates = Jinja2Templates(directory=Path(__file__).resolve().parents[1] / "templates")
+templates.env.tests["http_url"] = is_http_url
 
 
 @router.get("/", response_class=HTMLResponse)
-def index(request: Request) -> HTMLResponse:
-    # Placeholder data for milestone 1; real sources come later.
-    context = {
-        "today": date.today().strftime("%A, %d %B %Y"),
-        "weather": ["8 °C, light clouds", "Rain expected after 16:00"],
-        "tasks": ["Review lecture notes", "Push milestone 1"],
-        "updates": ["S-Bahn Ring: delays between Ostkreuz and Treptower Park this morning."],
-        "news": [],
-    }
-    return templates.TemplateResponse(request, "index.html", context)
+def index(request: Request, settings: Settings = Depends(get_settings)) -> HTMLResponse:
+    # Same grant lookup as nylas_routes.get_grant_id, but optional: no grant just
+    # makes the schedule card "unavailable".
+    session = getattr(request.state, "session", None) or {}
+    grant_id = settings.nylas_grant_id or session.get("grant_id")
+    briefing = build_briefing(settings, grant_id=grant_id)
+    return templates.TemplateResponse(request, "index.html", {"briefing": briefing})
 
 
 @router.post("/ask")
@@ -41,8 +38,3 @@ async def ask(request: Request) -> dict[str, str]:
 def health(settings: Settings = Depends(get_settings)) -> dict[str, str]:
     return {"status": "ok", "app": settings.app_name}
 
-
-@router.post("/calculate/{operation}", response_model=CalculationResponse)
-def calculate(operation: Operation, payload: CalculationRequest) -> CalculationResponse:
-    result = OPERATIONS[operation](payload.a, payload.b)
-    return CalculationResponse(operation=operation, a=payload.a, b=payload.b, result=result)

@@ -1,0 +1,53 @@
+{
+  "request_id": "req-events-1",
+  "data": [
+    {
+      "id": "ev-team-sync", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": true, "participants": [], "status": "confirmed", "title": "Team sync",
+      "when": {"object": "timespan", "start_time": 1794835800, "end_time": 1794837600,
+               "start_timezone": "Europe/Berlin", "end_timezone": "Europe/Berlin"}
+    },
+    {
+      "id": "ev-lecture", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": true, "participants": [], "status": "confirmed", "title": "Lecture: Distributed Systems",
+      "when": {"object": "timespan", "start_time": 1794816000, "end_time": 1794819600,
+               "start_timezone": "Europe/Berlin", "end_timezone": "Europe/Berlin"}
+    },
+    {
+      "id": "ev-birthday", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": false, "participants": [], "status": "confirmed", "title": "Sam's birthday",
+      "when": {"object": "date", "date": "2026-11-16"}
+    },
+    {
+      "id": "ev-conference", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": true, "participants": [], "status": "confirmed", "title": "Conference",
+      "when": {"object": "datespan", "start_date": "2026-11-15", "end_date": "2026-11-18"}
+    },
+    {
+      "id": "ev-ended-yesterday", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": true, "participants": [], "status": "confirmed", "title": "Weekend trip",
+      "when": {"object": "datespan", "start_date": "2026-11-14", "end_date": "2026-11-16"}
+    },
+    {
+      "id": "ev-cancelled", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": true, "participants": [], "status": "cancelled", "title": "Cancelled meeting",
+      "when": {"object": "timespan", "start_time": 1794823200, "end_time": 1794825000}
+    },
+    {
+      "id": "ev-reminder", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": false, "participants": [], "status": "confirmed", "title": "Call the dentist",
+      "when": {"object": "time", "time": 1794826800, "timezone": "Europe/Berlin"}
+    },
+    {
+      "id": "ev-overnight", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": true, "participants": [], "status": "confirmed", "title": "Night train",
+      "when": {"object": "timespan", "start_time": 1794780000, "end_time": 1794787200}
+    },
+    {
+      "id": "ev-tomorrow", "grant_id": "grant-test", "calendar_id": "cal-primary", "object": "event",
+      "busy": true, "participants": [], "status": "confirmed", "title": "Tomorrow's standup",
+      "when": {"object": "timespan", "start_time": 1794902400, "end_time": 1794906000}
+    }
+  ],
+  "next_cursor": null
+}

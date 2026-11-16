@@ -8,6 +8,8 @@ wheels/
 
 # webhooks 
 *.json
+# hand-written test fixtures are versioned
+!tests/fixtures/*.json
 
 # Database
 *.db
